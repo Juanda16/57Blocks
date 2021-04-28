@@ -28,22 +28,28 @@ class CounterRepositoryImpl implements CounterRepository {
   }
 
   @override
-  Future<Either<Failure, CounterEntity>> getLastNumber(int number) async {
+  Future<Either<Failure, CounterEntity>> getLastNumber() async {
     return await _getResult(() {
       return localDataSource.getLastNumber();
     });
   }
 
+  @override
+  saveCacheNumber(CounterEntity counterEntity) {
+    localDataSource
+        .saveCacheNumber(CounterNumberModel(number: counterEntity.number));
+  }
+
   Future<Either<Failure, CounterEntity>> _getResult(
     _ConcreteOrRandomChooser getConcreteOrRandom,
   ) async {
-    CounterEntity num = CounterEntity(number: 1);
+    //CounterEntity num = CounterEntity(number: 1);
     if (await networkInfo.isConnected) {
       try {
         final remoteNumber = await getConcreteOrRandom();
         CounterNumberModel modelRemoteNumber =
             CounterNumberModel(number: remoteNumber.number);
-        localDataSource.cacheNumber(modelRemoteNumber);
+        localDataSource.saveCacheNumber(modelRemoteNumber);
         return Right(remoteNumber);
       } on ServerException {
         return Left(ServerFailure());

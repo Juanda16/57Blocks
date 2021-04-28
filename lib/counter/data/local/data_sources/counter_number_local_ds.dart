@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class CounterNumberLocalDataSource {
   Future<CounterNumberModel> getLastNumber();
-  Future<void> cacheNumber(CounterNumberModel numberToCache);
+  Future<void> saveCacheNumber(CounterNumberModel numberToCache);
 }
 
 const CACHED_NUMBER = 'CACHED_NUMBER';
@@ -18,7 +18,7 @@ class CounterNumberLocalDataSourceImpl implements CounterNumberLocalDataSource {
   CounterNumberLocalDataSourceImpl({required this.sharedPreferences});
 
   @override
-  Future<void> cacheNumber(CounterNumberModel numberToCache) {
+  Future<void> saveCacheNumber(CounterNumberModel numberToCache) {
     return sharedPreferences.setString(
       CACHED_NUMBER,
       json.encode(numberToCache.toJson()),

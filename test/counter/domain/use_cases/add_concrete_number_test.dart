@@ -19,7 +19,7 @@ void main() {
   final int number = 1;
   test('Should get concrete number from the repository', () async {
     //Arrange
-    when(mockCounterRepository.getLastNumber(number))
+    when(mockCounterRepository.getLastNumber())
         .thenAnswer((_) async => Right(tNumber));
     //Act
 

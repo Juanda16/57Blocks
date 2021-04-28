@@ -11,6 +11,23 @@ class AddRandomNumber extends UseCase<CounterEntity, NoParams> {
 
   @override
   Future<Either<Failure, CounterEntity>> call(NoParams params) async {
-    return await repository.addApiRandomNumber();
+    final lastValue = await repository.getLastNumber();
+    final resultRandom = await repository.addApiRandomNumber();
+
+    return resultRandom.fold((failure) => Left(failure), (random) {
+      return lastValue.fold((failure) => Left(failure), (last) {
+        final sum = last.number + random.number;
+        repository.saveCacheNumber(CounterEntity(number: sum));
+        return Right(CounterEntity(number: sum));
+      });
+    });
   }
 }
+
+// resultRandom.map((random) {
+//   return lastValue
+//       .map((last) => CounterEntity(number: (random.number + last.number)));
+// });
+
+//return result.map((r) => (CounterEntity(number: r.number + params.number)));
+//lastValue.map((last) => CounterEntity(number: last.number+r.number ));

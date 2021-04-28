@@ -40,7 +40,7 @@ class _NumberControlsState extends State<NumberControls> {
             Expanded(
               //Search concrete Button
               child: ElevatedButton(
-                child: Text('Search'),
+                child: Text('Add number'),
                 //color: Theme.of(context).accentColor,
                 //textTheme: ButtonTextTheme.primary,
                 onPressed: dispatchConcrete,
@@ -50,7 +50,7 @@ class _NumberControlsState extends State<NumberControls> {
             Expanded(
               //Random Button
               child: ElevatedButton(
-                child: Text('Get random trivia'),
+                child: Text('Add random Number'),
                 //color: Theme.of(context).accentColor,
                 //textTheme: ButtonTextTheme.primary,
                 onPressed: dispatchRandom,

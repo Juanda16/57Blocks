@@ -5,6 +5,10 @@ class CounterEntity extends Equatable {
 
   CounterEntity({required this.number});
 
+   int sum (int newNumber){
+     return  this.number + newNumber;
+  }
+
   @override
   List<Object> get props => [number];
 }

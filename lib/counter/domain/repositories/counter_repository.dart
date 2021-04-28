@@ -5,5 +5,7 @@ import 'package:dartz/dartz.dart';
 abstract class CounterRepository {
   Future<Either<Failure, CounterEntity>> addApiRandomNumber();
 
-  Future<Either<Failure, CounterEntity>> getLastNumber(int number);
+  Future<Either<Failure, CounterEntity>> getLastNumber();
+
+  saveCacheNumber(CounterEntity counterEntity);
 }

@@ -12,7 +12,13 @@ class AddConcreteNumber extends UseCase<CounterEntity, Params> {
 
   @override
   Future<Either<Failure, CounterEntity>> call(Params params) async {
-    return await repository.getLastNumber(params.number);
+    final result = await repository.getLastNumber();
+
+    return result.map((lastNumber) {
+      final sum = lastNumber.number + params.number;
+      repository.saveCacheNumber(CounterEntity(number: sum));
+      return CounterEntity(number: sum);
+    });
   }
 }
 
