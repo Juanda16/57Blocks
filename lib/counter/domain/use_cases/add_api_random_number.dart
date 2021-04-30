@@ -12,7 +12,7 @@ class AddRandomNumber extends UseCase<CounterEntity, NoParams> {
   @override
   Future<Either<Failure, CounterEntity>> call(NoParams params) async {
     final lastValue = await repository.getLastNumber();
-    final resultRandom = await repository.addApiRandomNumber();
+    final resultRandom = await repository.getApiRandomNumber();
 
     return resultRandom.fold((failure) => Left(failure), (random) {
       return lastValue.fold((failure) => Left(failure), (last) {

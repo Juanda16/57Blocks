@@ -21,7 +21,7 @@ class CounterRepositoryImpl implements CounterRepository {
       required this.networkInfo});
 
   @override
-  Future<Either<Failure, CounterEntity>> addApiRandomNumber() async {
+  Future<Either<Failure, CounterEntity>> getApiRandomNumber() async {
     return await _getResult(() {
       return remoteDataSource.getRemoteRandomNumber();
     });

@@ -1,8 +1,6 @@
 import 'dart:convert';
-
 import 'package:bloc_counter/core/error/exceptions.dart';
 import 'package:bloc_counter/counter/data/models/counter_number_model.dart';
-import 'package:bloc_counter/counter/domain/entities/counter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class CounterNumberLocalDataSource {
